@@ -96,6 +96,20 @@ body {
     overflow: hidden;
 }
 
+.msg.error .msg-bubble {
+    background: brown;
+    cursor: pointer
+}
+
+.msg.error .msg-bubble:after {
+    content: "Retry?";
+    cursor: pointer;
+    padding-top: 10px;
+    font-size: 0.8em;
+    font-style: italic;
+    color: white;
+}
+
 .msg-info {
     display: flex;
     justify-content: space-between;

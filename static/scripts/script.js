@@ -93,7 +93,8 @@ function buttonsHtml(buttons) {
                 onclick = "window.open(\"" + buttons[j].url + "\");"
                 break;
             default:
-                onclick = "botResponse(\"" + buttons[j].actions[0].id + "\");"
+                onclick = "botResponse(\"" + buttons[j].actions[0].id + "\");appendMessage(\"" + PERSON_NAME + "\", \"" + PERSON_IMG + "\", \"right\", \"" + buttons[j].title + "\");";
+
         }
         if (buttons[j].destroy_all_on_interaction) {
             onclick += "$(this).parent().parent().parent().remove();";
@@ -111,7 +112,18 @@ function botResponse(rawText) {
     $.getJSON("/get", {
         msg: rawText,
         userID: USER_ID
+    }).fail(function() {
+        var last = $('.msg').last();
+        last.data('rawText', rawText);
+        last.addClass('error').click(function() {
+            $(this).hide();
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", $(this).data('rawText'));
+            msgerInput.value = "";
+            botResponse($(this).data('rawText'));
+
+        })
     }).done(function(data) {
+        $('.msg.error').last().removeClass('error')
         var output = data.data.attributes.output
         const msgText = data;
         for (var i = 0; i < output.length; i++) {
@@ -167,14 +179,23 @@ function botResponse(rawText) {
 }
 
 function setUserId(userId) {
-    window.localStorage.setItem("tbp.userId", userId);
+    try {
+        window.localStorage.setItem("tbp.userId", userId);
+    } catch (e) {
+
+    }
     USER_ID = userId;
 }
 
 function createUserIfNotExists(cb) {
     // check if user already exists
-    var userId = window.localStorage.getItem("tbp.userId");
-    if (userId.length > 1 && userId !== "null") {
+    var userId = "";
+    try {
+        userId = window.localStorage.getItem("tbp.userId");
+    } catch (e) {
+
+    }
+    if (userId && userId.length > 1 && userId !== "null") {
         setUserId(userId);
         cb();
         return;
@@ -183,6 +204,10 @@ function createUserIfNotExists(cb) {
     $.get("/createuser").done(function(data) {
         setUserId(data);
         cb();
+    }).fail(function(e) {
+        console.log(e.statusText);
+        console.log(e);
+        alert("error");
     });
 }
 

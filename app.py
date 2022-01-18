@@ -16,15 +16,11 @@ def testexample():
 
 @app.route("/createuser")
 def create_user():
-    bearerToken = BearerTokenGrab()
-    return CreateUserID(bearerToken)
+    return CreateUserID()
 
 @app.route("/get")
 def get_bot_response():
-    userText = request.args.get('msg')
-    UserID = request.args.get('userID')   
-    message = getBotResponse(UserID, userText)
-    return message
+    return getBotResponse(request.args.get('userID') , request.args.get('msg'))
     
 if __name__ == "__main__":
-    app.run() 
+    app.run()
