@@ -44,6 +44,12 @@ function botResponse(rawText) {
         for (var i = 0; i < output.length; i++) {
             console.log(output[i]);
             switch (output[i].type) {
+                case 'video':
+                    appendMessage(BOT_NAME, BOT_IMG, "left", "<video src='" + output[i].url + "' autoplay controls></video>");
+                    break;
+                case 'audio':
+                    appendMessage(BOT_NAME, BOT_IMG, "left", "<audio src='" + output[i].url + "' autoplay controls></audio>");
+                    break;
                 case 'image':
                     appendMessage(BOT_NAME, BOT_IMG, "left", "<img src='" + output[i].url + "'/>");
                     break;
