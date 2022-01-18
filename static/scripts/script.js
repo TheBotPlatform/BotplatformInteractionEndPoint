@@ -52,7 +52,7 @@ function appendMessage(name, img, side, text, buttons = "", isCarousel = false) 
                     }
 
                     carouselSettings.active--;
-                    parent[0].scrollLeft = carousel.find('.card:nth-child(' + (carouselSettings.active + 1) + ')').position().left + parent[0].scrollLeft - 15;
+                    parent.animate({ scrollLeft: carousel.find('.card:nth-child(' + (carouselSettings.active + 1) + ')').position().left + parent[0].scrollLeft - 15 })
 
                     carouselSettings.rightButton.removeClass('disabled').addClass('enabled');
                     if (carouselSettings.active == 0) {
@@ -64,7 +64,7 @@ function appendMessage(name, img, side, text, buttons = "", isCarousel = false) 
                         return;
                     }
                     carouselSettings.active++;
-                    parent[0].scrollLeft = carousel.find('.card:nth-child(' + (carouselSettings.active + 1) + ')').position().left + parent[0].scrollLeft - 15;
+                    parent.animate({ scrollLeft: carousel.find('.card:nth-child(' + (carouselSettings.active + 1) + ')').position().left + parent[0].scrollLeft - 15 })
 
                     carouselSettings.leftButton.removeClass('disabled').addClass('enabled');
                     if (carouselSettings.active >= carouselSettings.count - 1) {
@@ -127,6 +127,12 @@ function botResponse(rawText) {
                     var html = "<div class='carousel-container'><div class='carousel' style='width:" + output[i].cards.length + "00%'>";
                     for (var j = 0; j < output[i].cards.length; j++) {
                         var card = output[i].cards[j];
+                        if (card.subtitle === undefined) {
+                            card.subtitle = "";
+                        }
+                        if (card.title === undefined) {
+                            card.title = "";
+                        }
                         var buttons = "";
                         if (card.buttons !== undefined && card.buttons.length > 0) {
                             buttons = buttonsHtml(card.buttons);
