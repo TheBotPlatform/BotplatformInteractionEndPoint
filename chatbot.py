@@ -9,8 +9,10 @@ import json
 #Creating and getting my bearer token
 
 def BearerTokenGrab():
+    clientID = "CLIENT_ID"
+    clientSecret = "CLIENT_SECRET"
     url = "https://api.thebotplatform.com/oauth2/token"
-    payload = "client_id=b9c8d325-783b-4031-b759-37f531bd0105&client_secret=VT-Wh8kw35kUaM6e7gTSDRuFtR&grant_type=client_credentials"
+    payload = "client_id="+clientID+"&client_secret="+clientSecret+"&grant_type=client_credentials"
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
