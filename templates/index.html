@@ -38,7 +38,7 @@
         const PERSON_IMG = "http://placekitten.com/31/31";
         const BOT_NAME = "The Bot Platform";
         const PERSON_NAME = "You";
-        const START_MESSAGE = "__PAYLOAD__START";
+        const START_MESSAGE = window.location.search.replace("?message=", "");
         var USER_ID = false; // set this to a unique string or id that you want to use, or a new one will be created for each user
     </script>
     <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>

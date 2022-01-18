@@ -123,8 +123,16 @@ function botResponse(rawText) {
 
         })
     }).done(function(data) {
-        $('.msg.error').last().removeClass('error')
-        var output = data.data.attributes.output
+        $('.msg.error').last().removeClass('error');
+        var output;
+        try {
+            output = data.data.attributes.output
+        } catch (e) {
+            alert("ERROR " + data.errors[0].detail);
+            console.log(data.errors[0].detail);
+            console.log(data);
+
+        }
         const msgText = data;
         for (var i = 0; i < output.length; i++) {
             switch (output[i].type) {

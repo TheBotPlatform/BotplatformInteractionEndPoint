@@ -42,7 +42,8 @@ Include just before your `</head>`
 <script>
     $(function() {
         TBPChatWindow({
-            url: "/" // where can it access the view of the bot
+            url: "/", // where can it access the view of the bot
+            welcomeMessage: "__PAYLOAD__START" // this is the welcome message, although you can use @BP:MESSAGE:ID format if you'd prefer or want to choose a specific message to start from
         }).init();
     })
 </script>

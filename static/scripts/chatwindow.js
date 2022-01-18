@@ -2,7 +2,7 @@ var TBPChatWindow = function(settings) {
     var url = settings.url;
 
     var widget = {
-        frame: $('<iframe id="tbp-web-bot" src="' + url + '"></iframe>'),
+        frame: $('<iframe id="tbp-web-bot" src="' + url + '?message=' + settings.welcomeMessage + '"></iframe>'),
         close: $('<div id="tbp-close-chat">X</div>'),
         bubble: $('<div id="tbp-chatbubble"><i class="fas fa-robot"></i></div>')
     };
