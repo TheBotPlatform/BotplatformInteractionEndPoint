@@ -51,4 +51,3 @@ Include just before your `</head>`
 
 ## Further reading
 - [API Docs](https://drive.google.com/file/d/1XSo1WfToh3tsU4iSulaum64K_dvpudxx/view?usp=sharing)
-- [Tutorial](https://docs.google.com/document/d/1XiUkf4Mbvk55ZbYmewLPsFoFcHiVFmLNQyaXyYskxi4/edit?usp=sharing)
