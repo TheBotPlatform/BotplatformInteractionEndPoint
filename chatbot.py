@@ -5,12 +5,14 @@ import requests
 import re
 import json
 
+from decouple import config
 
 #Creating and getting my bearer token
 
 def BearerTokenGrab():
-    clientID = "CLIENT_ID"
-    clientSecret = "CLIENT_SECRET"
+
+    clientID = config("TBP_CLIENT_ID")
+    clientSecret = config("TBP_CLIENT_SECRET")
     url = "https://api.thebotplatform.com/oauth2/token"
     payload = "client_id="+clientID+"&client_secret="+clientSecret+"&grant_type=client_credentials"
     headers = {
@@ -54,32 +56,30 @@ def CreateUserID(Token):
     UserID = SplitClientID[6]
     return UserID
 
-UserIDcontent = CreateUserID(BearerTest)
-print("User Id is : "+UserIDcontent)
+
 
 
 def getWelcomeMsg(UserID):
+    return getPayloadMsg(UserID, "__PAYLOAD__START")
+
+def getPayloadMsg(UserID, payload):
     url = "https://api.thebotplatform.com/v1.0/interaction"
     headers = {
         "Content-Type": "application/json",
         "Authorization": "Bearer "+BearerTest
         }
-    payloaddict = { "data": { "type": "interaction", "attributes": { "user": { "id":
-UserID }, "input": "__PAYLOAD__START" } } }
-    
+    payloaddict = { "data": { "type": "interaction", "attributes": { "user": { "id": UserID }, "input": payload } } }
 
     r = requests.post(url, headers=headers, json=payloaddict)
     JsonResponse = r.json()
+    print(JsonResponse)
     formatJsonresp = json.dumps(JsonResponse, indent=4, sort_keys=True)
-    responseDict = json.loads(formatJsonresp)
-    Actualwelcomemesglist = responseDict['data']['attributes']['output']
-    Actualwelcomemesgstring= str(Actualwelcomemesglist)
-    WelcomeList = Actualwelcomemesgstring.split("'", 10)
-    Welcome_Mesg = WelcomeList[3]
-    return Welcome_Mesg
+    # responseDict = json.loads(formatJsonresp)
+    # responseOutput = responseDict['data']['attributes']['output']
+    # message = responseOutput[0]['text']
+    return formatJsonresp
 
-Output = getWelcomeMsg(UserIDcontent)
-print(Output)
+
 #print(type(Output))
 #print(Output['type'])
 
