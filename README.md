@@ -48,6 +48,24 @@ Include just before your `</head>`
 </script>
 ```
 
+## Supported Message Parts
+
+- Welcome message
+- Text
+- Buttons
+- Quick replies
+- Carousels
+- Media (Images, GIFs, Videos, Audio)
+- Jump
+- Attributes
+- Webhook posts
+- Message variations
+
+## Features NOT supported
+
+- Delays
+- Webhook responses
+- Broadcasts
 
 ## Further reading
 - [API Docs](https://drive.google.com/file/d/1XSo1WfToh3tsU4iSulaum64K_dvpudxx/view?usp=sharing)
