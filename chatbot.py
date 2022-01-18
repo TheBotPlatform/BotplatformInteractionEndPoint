@@ -66,7 +66,7 @@ def getPayloadMsg(UserID, payload):
     url = "https://api.thebotplatform.com/v1.0/interaction"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer "+BearerTest
+        "Authorization": "Bearer "+BearerTokenGrab()
         }
     payloaddict = { "data": { "type": "interaction", "attributes": { "user": { "id": UserID }, "input": payload } } }
 
