@@ -8,8 +8,7 @@ To use the interaction end point you need a chat interface that you want to inte
 Once you've cloned the repo, duplicate .env.example as .env and set your client id and secret from The Bot Platform
 Install the required modules
 
-`pip install request`
-`pip install python-decouple`
+`pip install request python-decouple`
 
 run `python app.py`
 
