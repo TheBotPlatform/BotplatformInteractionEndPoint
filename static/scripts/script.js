@@ -161,7 +161,7 @@ function botResponse(rawText) {
                                 </div>`
                     }
 
-                    html += `</div>";
+                    html += `</div>
                                 <div class='carousel-controls'><button class='carousel-control carousel-control-left disabled'><i class='fas fa-arrow-left'></i></button><button class='carousel-control carousel-control-right disabled'><i class='fas fa-arrow-right'></i></button></div>
                             </div>`;
                     appendMessage(BOT_NAME, BOT_IMG, "left", html, "", true);
