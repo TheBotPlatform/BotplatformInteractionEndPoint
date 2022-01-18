@@ -90,8 +90,10 @@ body {
 .msg-bubble {
     max-width: 450px;
     padding: 15px;
+    position: relative;
     border-radius: 15px;
     background: var(--left-msg-bg);
+    overflow: hidden;
 }
 
 .msg-info {
@@ -171,15 +173,71 @@ body {
     max-width: 100%;
 }
 
-.msg-buttons button {
+.msg-buttons button,
+.card-buttons button {
     padding: 3px 8px;
     border: 1px solid #000;
     border-radius: 2px;
-    margin: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
-.msg-buttons button:hover {
+.msg-buttons button:hover,
+.card-buttons button:hover {
     background: #000;
     color: #fff;
+}
+
+.carousel-container {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.carousel .card {
+    display: inline-block;
+}
+
+.carousel-controls {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    margin-top: -15px;
+    width: 100%;
+}
+
+.carousel-controls .carousel-control {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border: 1px solid #000;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.carousel-controls .carousel-control.enabled {
+    cursor: pointer;
+}
+
+.carousel-controls .carousel-control.enabled:hover {
+    background: #000;
+    color: #fff;
+}
+
+.carousel-controls .carousel-control.disabled {
+    opacity: 0;
+}
+
+.carousel-controls .carousel-control-left {
+    left: -15px;
+}
+
+.carousel-controls .carousel-control-right {
+    right: 15px;
+}
+
+.carousel .card-title,
+.carousel .card-subtitle {
+    margin-bottom: 3px;
 }

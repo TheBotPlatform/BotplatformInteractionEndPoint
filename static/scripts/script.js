@@ -11,7 +11,7 @@ msgerForm.addEventListener("submit", event => {
     botResponse(msgText);
 });
 
-function appendMessage(name, img, side, text, buttons = "") {
+function appendMessage(name, img, side, text, buttons = "", isCarousel = false) {
     if (text === undefined) {
         text = "";
     }
@@ -30,7 +30,78 @@ function appendMessage(name, img, side, text, buttons = "") {
       </div>
       `;
     msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+    setTimeout(function() {
+
+        if (isCarousel) {
+            $(msgerChat).find('.carousel-container:not(.carousel-rendered)').each(function() {
+                var parent = $(this);
+                var carousel = $(this).find('.carousel');
+
+                var carouselSettings = {
+                    count: carousel.find('.card').length,
+                    active: 0,
+                    leftButton: parent.find('.carousel-control-left'),
+                    rightButton: parent.find('.carousel-control-right')
+                }
+                if (carouselSettings.count > 1) {
+                    carouselSettings.rightButton.addClass('enabled').removeClass('disabled');
+                }
+                carouselSettings.leftButton.click(function() {
+                    if ($(this).hasClass('disabled')) {
+                        return;
+                    }
+
+                    carouselSettings.active--;
+                    parent[0].scrollLeft = carousel.find('.card:nth-child(' + (carouselSettings.active + 1) + ')').position().left + parent[0].scrollLeft - 15;
+
+                    carouselSettings.rightButton.removeClass('disabled').addClass('enabled');
+                    if (carouselSettings.active == 0) {
+                        carouselSettings.leftButton.removeClass('enabled').addClass('disabled');
+                    }
+                });
+                carouselSettings.rightButton.click(function() {
+                    if ($(this).hasClass('disabled')) {
+                        return;
+                    }
+                    carouselSettings.active++;
+                    parent[0].scrollLeft = carousel.find('.card:nth-child(' + (carouselSettings.active + 1) + ')').position().left + parent[0].scrollLeft - 15;
+
+                    carouselSettings.leftButton.removeClass('disabled').addClass('enabled');
+                    if (carouselSettings.active >= carouselSettings.count - 1) {
+                        carouselSettings.rightButton.removeClass('enabled').addClass('disabled');
+                    }
+                })
+
+                parent.addClass('carousel-rendered')
+            })();
+
+        }
+    }, 10);
+
     msgerChat.scrollTop += 500;
+}
+
+
+function buttonsHtml(buttons) {
+    var html = "";
+    for (var j = 0; j < buttons.length; j++) {
+        var onclick = "";
+        switch (buttons[j].type) {
+            case 'open_url':
+                onclick = "window.open(\"" + buttons[j].url + "\");"
+                break;
+            default:
+                onclick = "botResponse(\"" + buttons[j].actions[0].id + "\");"
+        }
+        if (buttons[j].destroy_all_on_interaction) {
+            onclick += "$(this).parent().parent().parent().remove();";
+            onclick += "appendMessage(PERSON_NAME, PERSON_IMG, \"right\", \"" + buttons[j].title + "\");"
+        }
+
+        var button = "<button onclick='" + onclick + "' class='msg-button'>" + buttons[j].title + "</button>";
+        html += button;
+    }
+    return html;
 }
 
 function botResponse(rawText) {
@@ -42,7 +113,6 @@ function botResponse(rawText) {
         var output = data.data.attributes.output
         const msgText = data;
         for (var i = 0; i < output.length; i++) {
-            console.log(output[i]);
             switch (output[i].type) {
                 case 'video':
                     appendMessage(BOT_NAME, BOT_IMG, "left", "<video src='" + output[i].url + "' autoplay controls></video>");
@@ -53,28 +123,34 @@ function botResponse(rawText) {
                 case 'image':
                     appendMessage(BOT_NAME, BOT_IMG, "left", "<img src='" + output[i].url + "'/>");
                     break;
+                case 'carousel':
+                    var html = "<div class='carousel-container'><div class='carousel' style='width:" + output[i].cards.length + "00%'>";
+                    for (var j = 0; j < output[i].cards.length; j++) {
+                        var card = output[i].cards[j];
+                        var buttons = "";
+                        if (card.buttons !== undefined && card.buttons.length > 0) {
+                            buttons = buttonsHtml(card.buttons);
+                        }
+                        var img = "<div class='card-image'><img src='" + card.image + "'/></div>"
+                        var width = 100 / output[i].cards.length;
+                        html += `<div class='card' style='margin-right:1%;width:${width-2}%'>
+                      ${img}
+                      <div class='card-title'>${card.title}</div>
+                      <div class='card-subtitle'>${card.subtitle}</div>
+                      <div class='card-buttons'>${buttons}</div>
+                    </div>`
+                    }
+
+                    html += "</div>";
+                    html += "<div class='carousel-controls'><button class='carousel-control carousel-control-left disabled'><i class='fas fa-arrow-left'></i></button><button class='carousel-control carousel-control-right disabled'><i class='fas fa-arrow-right'></i></button></div>"
+                    html += "</div>";
+                    appendMessage(BOT_NAME, BOT_IMG, "left", html, "", true);
+
+                    break;
                 default:
                     var buttons = "";
                     if (output[i].buttons !== undefined && output[i].buttons.length > 0) {
-                        for (var j = 0; j < output[i].buttons.length; j++) {
-                            var onclick = "";
-                            switch (output[i].buttons[j].type) {
-                                case 'open_url':
-                                    onclick = "window.open(\"" + output[i].buttons[j].url + "\");"
-                                    break;
-                                default:
-                                    onclick = "botResponse(\"" + output[i].buttons[j].actions[0].id + "\");"
-                            }
-                            if (output[i].buttons[j].destroy_all_on_interaction) {
-                                onclick += "$(this).parent().parent().parent().remove();";
-                                onclick += "appendMessage(PERSON_NAME, PERSON_IMG, \"right\", \"" + output[i].buttons[j].title + "\");"
-                            }
-
-
-
-                            var button = "<button onclick='" + onclick + "' class='msg-button'>" + output[i].buttons[j].title + "</button>";
-                            buttons += button;
-                        }
+                        buttons = buttonsHtml(output[i].buttons)
                     }
                     appendMessage(BOT_NAME, BOT_IMG, "left", output[i].text, buttons);
             }
