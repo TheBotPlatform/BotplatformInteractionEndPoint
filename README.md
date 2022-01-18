@@ -35,9 +35,10 @@ Visit http://127.0.0.1:5000/example to see an example
 Include just before your `</head>`
 
 ```html
-<link rel="stylesheet" href="/static/styles/chatwindow.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+
+<link rel="stylesheet" href="/static/styles/chatwindow.css" />
 <script src="/static/scripts/chatwindow.js"></script>
 <script>
     $(function() {
