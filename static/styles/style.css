@@ -213,7 +213,7 @@ body {
 .carousel-container {
     width: 100%;
     overflow-x: hidden;
-    -webkit-transform: linear 500ms;
+    transform: linear 500ms;
 }
 
 .carousel .card {
