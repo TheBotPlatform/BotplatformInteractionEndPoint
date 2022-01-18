@@ -1,4 +1,6 @@
-var USER_ID = false;
+const msgerForm = document.querySelector(".msger-inputarea");
+const msgerInput = document.querySelector(".msger-input");
+const msgerChat = document.querySelector(".msger-chat");
 
 msgerForm.addEventListener("submit", event => {
     event.preventDefault();
@@ -140,18 +142,17 @@ function botResponse(rawText) {
                         var img = "<div class='card-image'><img src='" + card.image + "'/></div>"
                         var width = 100 / output[i].cards.length;
                         html += `<div class='card' style='margin-right:1%;width:${width-2}%'>
-                      ${img}
-                      <div class='card-title'>${card.title}</div>
-                      <div class='card-subtitle'>${card.subtitle}</div>
-                      <div class='card-buttons'>${buttons}</div>
-                    </div>`
+                                    ${img}
+                                    <div class='card-title'>${card.title}</div>
+                                    <div class='card-subtitle'>${card.subtitle}</div>
+                                    <div class='card-buttons'>${buttons}</div>
+                                </div>`
                     }
 
-                    html += "</div>";
-                    html += "<div class='carousel-controls'><button class='carousel-control carousel-control-left disabled'><i class='fas fa-arrow-left'></i></button><button class='carousel-control carousel-control-right disabled'><i class='fas fa-arrow-right'></i></button></div>"
-                    html += "</div>";
+                    html += `</div>";
+                                <div class='carousel-controls'><button class='carousel-control carousel-control-left disabled'><i class='fas fa-arrow-left'></i></button><button class='carousel-control carousel-control-right disabled'><i class='fas fa-arrow-right'></i></button></div>
+                            </div>`;
                     appendMessage(BOT_NAME, BOT_IMG, "left", html, "", true);
-
                     break;
                 default:
                     var buttons = "";
@@ -171,26 +172,18 @@ function setUserId(userId) {
 }
 
 function createUserIfNotExists(cb) {
-    // Bot Response
-
+    // check if user already exists
     var userId = window.localStorage.getItem("tbp.userId");
     if (userId.length > 1 && userId !== "null") {
         setUserId(userId);
         cb();
         return;
     }
-
+    // create a new user
     $.get("/createuser").done(function(data) {
-
         setUserId(data);
         cb();
     });
-}
-
-
-// Utils
-function get(selector, root = document) {
-    return root.querySelector(selector);
 }
 
 function formatDate(date) {

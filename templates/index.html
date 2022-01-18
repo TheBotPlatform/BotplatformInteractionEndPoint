@@ -10,13 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script>
-        const BOT_IMG = "https://pbs.twimg.com/profile_images/1253519949303353344/TYRXwLmw_400x400.jpg";
-        const PERSON_IMG = "http://placekitten.com/31/31";
-        const BOT_NAME = "The Bot Platform";
-        const PERSON_NAME = "You";
-        const START_MESSAGE = "__PAYLOAD__START";
-    </script>
+
 </head>
 
 <body>
@@ -38,13 +32,16 @@
         </form>
     </section>
 
-    <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
 
     <script>
-        const msgerForm = document.querySelector(".msger-inputarea");
-        const msgerInput = document.querySelector(".msger-input");
-        const msgerChat = document.querySelector(".msger-chat");
+        const BOT_IMG = "https://pbs.twimg.com/profile_images/1253519949303353344/TYRXwLmw_400x400.jpg";
+        const PERSON_IMG = "http://placekitten.com/31/31";
+        const BOT_NAME = "The Bot Platform";
+        const PERSON_NAME = "You";
+        const START_MESSAGE = "__PAYLOAD__START";
+        var USER_ID = false; // set this to a unique string or id that you want to use, or a new one will be created for each user
     </script>
+    <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
     <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
 
 
