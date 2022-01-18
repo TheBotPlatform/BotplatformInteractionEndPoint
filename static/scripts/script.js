@@ -98,7 +98,6 @@ function buttonsHtml(buttons) {
         }
         if (buttons[j].destroy_all_on_interaction) {
             onclick += "$(this).parent().parent().parent().remove();";
-            onclick += "appendMessage(PERSON_NAME, PERSON_IMG, \"right\", \"" + buttons[j].title + "\");"
         }
 
         var button = "<button onclick='" + onclick + "' class='msg-button'>" + buttons[j].title + "</button>";
