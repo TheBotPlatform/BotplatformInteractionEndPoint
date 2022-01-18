@@ -19,9 +19,9 @@ Now visit http://127.0.0.1:5000/example to see it in place
 Visit http://127.0.0.1:5000/
 
 To change any of the styling check out the following files:
-- templates/index.html
-- static/styles/style.css
-- static/scripts/scripts.js
+- [templates/index.html](https://github.com/TheBotPlatform/POCInteractionEndpointPython/blob/main/templates/index.html)
+- [static/styles/style.css](https://github.com/TheBotPlatform/POCInteractionEndpointPython/blob/main/static/styles/style.css)
+- [static/scripts/scripts.js](https://github.com/TheBotPlatform/POCInteractionEndpointPython/blob/main/static/scripts/script.js)
 
 ## Embed
 
