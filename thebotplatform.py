@@ -1,17 +1,25 @@
 import requests
-import re
 import json
 
 from decouple import config
+import time
 
 #Creating and getting my bearer token
 
-def BearerTokenGrab():
+LastToken = False
+LastTokenTime = False
+TokenLifespan = 58 * 60
 
-    clientID = config("TBP_CLIENT_ID")
-    clientSecret = config("TBP_CLIENT_SECRET")
+def BearerTokenGrab():
+    global LastToken
+    global LastTokenTime
+    now = time.time()
+
+    if LastToken and LastTokenTime > now - TokenLifespan:
+        return LastToken
+    
     url = "https://api.thebotplatform.com/oauth2/token"
-    payload = "client_id="+clientID+"&client_secret="+clientSecret+"&grant_type=client_credentials"
+    payload = "client_id=" + config("TBP_CLIENT_ID") + "&client_secret=" + config("TBP_CLIENT_SECRET") + "&grant_type=client_credentials"
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
@@ -19,6 +27,8 @@ def BearerTokenGrab():
 
     response = requests.post(url, data=payload, headers=headers)
     jsonResponse = response.json()
+    LastToken = jsonResponse['access_token']
+    LastTokenTime = now
     return jsonResponse['access_token']
 
 #Creates a User ID for the current user
