@@ -4,6 +4,8 @@ A proof of concept bot using the interaction end point
 ## Chat interface
 To use the interaction end point you need a chat interface that you want to integrate with it. In this proof of concept we are using a python based interface: https://github.com/ahmadfaizalbh/Chatbot
 
+![Screenshot](https://github.com/TheBotPlatform/POCInteractionEndpointPython/raw/main/static/img/screenshot.png)
+
 ## Getting started
 Once you've cloned the repo, duplicate .env.example as .env and set your client id and secret from The Bot Platform
 Install the required modules
