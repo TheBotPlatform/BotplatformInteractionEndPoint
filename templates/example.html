@@ -3,104 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>The Bot Platform</title>
+    <title>The Bot Platform Interaction Endpoint Example</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         body {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
         }
         
         #mainframe {
             position: relative;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             margin: 0;
             padding: 0;
             border: none;
         }
-        
-        #tbp-chatbubble {
-            position: fixed;
-            bottom: 20px;
-            right: 40px;
-            z-index: 99;
-            width: 80px;
-            height: 80px;
-            background: #0084ff;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 80px;
-            cursor: pointer;
-            font-size: 30px;
-            color: #fff;
-        }
-        
-        #tbp-chatbubble:hover {
-            background: #fff;
-            color: #0084ff
-        }
-        
-        #tbp-web-bot {
-            position: fixed;
-            bottom: 0;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            border: 2px solid #0084ff;
-            z-index: 100;
-            display: none;
-        }
-        
-        #tbp-close-chat {
-            position: fixed;
-            bottom: 520px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            z-index: 100;
-            font-weight: bold;
-            text-align: center;
-            line-height: 40px;
-            color: #fff;
-            background: #0084ff;
-            border-radius: 50%;
-            display: none;
-            cursor: pointer;
-        }
-        
-        #tbp-close-chat:hover {
-            background: #fff;
-            color: #0084ff
-        }
-        
-        .tbp-web-chat-visible #tbp-web-bot,
-        .tbp-web-chat-visible #tbp-close-chat {
-            display: block;
-        }
     </style>
-</head>
 
-<body class="tbp-web-chat-visible">
-    <iframe id="mainframe" src="https://syddev.com"></iframe>
-    <iframe id="tbp-web-bot" src="/"></iframe>
-    <div id="tbp-close-chat">X</div>
-    <div id="tbp-chatbubble"><i class="fas fa-robot"></i></div>
+    <!-- include the chat window -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/chatwindow.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
-
-
+    <script src="{{ url_for('static', filename='scripts/chatwindow.js') }}"></script>
     <script>
         $(function() {
-            $('#tbp-chatbubble').click(function() {
-                $('body').addClass("tbp-web-chat-visible");
-            })
-            $('#tbp-close-chat').click(function() {
-                $('body').removeClass("tbp-web-chat-visible");
-            })
+            TBPChatWindow({
+                url: "/" // where can it access the view of the bot
+            }).init();
         })
     </script>
+
+    <!-- that will automatically add the relevant elements to the page -->
+</head>
+
+<!-- give the body the class tbp-web-chat-visible to start visible-->
+
+<body class="tbp-web-chat-visible">
+
+    <!-- this is just example content -->
+    <iframe id="mainframe" src="https://syddev.com"></iframe>
 </body>
