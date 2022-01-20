@@ -1,8 +1,10 @@
 # Bot Platform Interaction Endpoint Client
-A proof of concept bot using the interaction end point
+A proof of concept bot using the interaction endpoint.
+
+The interaction endpoint enables you to connect [The Bot Platform](https://thebotplatform.com) to any chat interface you'd like.
 
 ## Chat interface
-To use the interaction end point you need a chat interface that you want to integrate with it. In this proof of concept we are using a python based proxy server based from: https://github.com/ahmadfaizalbh/Chatbot
+To use the interaction endpoint you need a chat interface that you want to integrate with it. In this proof of concept we are using a python based proxy server based from: https://github.com/ahmadfaizalbh/Chatbot
 
 ![Screenshot](https://github.com/TheBotPlatform/POCInteractionEndpointPython/raw/main/static/img/screenie.gif)
 
