@@ -67,6 +67,7 @@ Include just before your `</head>`
 
 ## Features NOT supported
 
+- User profile attributes, such as {{first_name}}, {{last_name}}, {{department}} etc.
 - Delays
 - Webhook responses
 - Broadcasts
