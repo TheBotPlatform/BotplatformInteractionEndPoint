@@ -1,4 +1,4 @@
-# Bot Platform Interaction Endpoint Client
+# The Bot Platform Interaction Endpoint Client
 A proof of concept bot using the interaction endpoint.
 
 The interaction endpoint enables you to connect [The Bot Platform](https://thebotplatform.com) to any chat interface you'd like.
