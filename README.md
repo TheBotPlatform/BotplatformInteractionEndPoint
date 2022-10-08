@@ -15,7 +15,7 @@ You will need to set up API access within The Bot Platform.  Select OAuth2 and m
 
 Install the required modules
 
-`pip install request python-decouple`
+`pip install requests python-decouple`
 
 run `python app.py`
 
