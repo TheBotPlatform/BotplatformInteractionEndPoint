@@ -9,7 +9,8 @@ To use the interaction endpoint you need a chat interface that you want to integ
 ![Screenshot](https://github.com/TheBotPlatform/POCInteractionEndpointPython/raw/main/static/img/screenie.gif)
 
 ## Getting started
-Once you've cloned the repo, duplicate .env.example as .env and set your client id and secret from The Bot Platform
+
+Step 1) Once you've cloned the repo, duplicate `.env.example` as `.env` and set your client id and secret from The Bot Platform
 
 You will need to set up API access within The Bot Platform.  Select OAuth2 and make sure you copy the Client ID and Client Secret and store them somewhere safe as you will only be able to access the secret once. 
 
